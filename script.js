@@ -1,31 +1,74 @@
 let divContainer = document.getElementById("container");
 
-let numberOfDivs;
+function createDivs() {
+    let numberOfDivs = prompt("Please enter a number", 16);
+    let x = divContainer.offsetHeight / numberOfDivs;
+    let y = divContainer.offsetWidth / numberOfDivs;
+    let numOfSquares = numberOfDivs * numberOfDivs;
 
-let x = divContainer.offsetHeight / 16;
-let y = divContainer.offsetWidth / 16;
+    for (let i = 0; i < numOfSquares; i++) {
 
-
-for (let index = 0; index < 256; index++) {
-
-    let dummyDiv = document.createElement("div");
-
-    dummyDiv.style.height = `${x}px`;
-    dummyDiv.style.width = `${y - 1}px`;
-    dummyDiv.style.borderWidth = "1px";
-    dummyDiv.style.borderStyle = "solid";
-    dummyDiv.style.borderColor = "red";
-    dummyDiv.style.lineHeight
-
-    divContainer.appendChild(dummyDiv);
-
+        let dummyDiv = document.createElement("div");
+        dummyDiv.style.height = `${x - 1}px`;
+        dummyDiv.style.width = `${y}px`;
+        dummyDiv.style.borderWidth = "1px";
+        dummyDiv.style.borderStyle = "solid";
+        dummyDiv.style.borderColor = "black";
+        dummyDiv.style.borderCollapse = "collapse";
+        dummyDiv.style.alignContent = "stretch";
+        divContainer.appendChild(dummyDiv);
+    }
 }
 
-let allDivs = divContainer.querySelectorAll('div');
-console.log(allDivs);
 
-allDivs.forEach(div => {
-    div.addEventListener('click', (e) => {
-        console.log(e);
+function addHoverColor() {
+    let allDivs = divContainer.querySelectorAll('div');
+
+    allDivs.forEach(div => {
+        let temph;
+        let temps;
+        let l = 90;
+        div.addEventListener('mouseover', (e) => {
+
+            let h = changeColor(360);
+            let s = changeColor(100);
+
+
+
+            if (!div.style.backgroundColor) {
+                temph = h;
+                temps = s;
+                div.style.backgroundColor = `hsl(${h},${s}%,${l}%)`
+                console.log("first time");
+                console.log({ h, s, l });
+                console.log({ temph, temps });
+
+
+            } else {
+                console.log("not AGAIN");
+                if (l <= 0) {
+                    l = 0
+                } else {
+                    l = l - 10;
+                };
+                console.log({ temph, temps, l });
+                div.style.backgroundColor = `hsl(${temph},${temps}%,${l}%)`
+            }
+
+        })
     })
-})
+}
+
+
+function changeColor(max) {
+    return Math.floor(
+        Math.random() * (max + 1)
+    )
+}
+
+function startSketching(){
+    createDivs();
+    addHoverColor();
+}
+
+startSketching();
