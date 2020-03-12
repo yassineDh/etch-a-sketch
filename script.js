@@ -1,5 +1,5 @@
 let divContainer = document.getElementById("container");
-
+let buttonReset = document.getElementById("reset");
 function createDivs() {
     let numberOfDivs = prompt("Please enter a number", 16);
     let x = divContainer.offsetHeight / numberOfDivs;
@@ -72,3 +72,8 @@ function startSketching(){
 }
 
 startSketching();
+
+buttonReset.addEventListener('click',()=>{
+    document.clear();
+    startSketching();
+})

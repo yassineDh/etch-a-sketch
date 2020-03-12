@@ -9,4 +9,15 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-content: flex-end;
+}
+
+#reset{
+  position: absolute;
+  height: 30px;
+  width: 100px;
+  background-color: cadetblue;
+  border-width: 0px;
+  float: left;
+  top: 50%;
 }
