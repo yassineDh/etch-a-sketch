@@ -20,7 +20,6 @@ function createDivs() {
     }
 }
 
-
 function addHoverColor() {
     let allDivs = divContainer.querySelectorAll('div');
 
@@ -29,36 +28,23 @@ function addHoverColor() {
         let temps;
         let l = 90;
         div.addEventListener('mouseover', (e) => {
-
             let h = changeColor(360);
             let s = changeColor(100);
-
-
-
             if (!div.style.backgroundColor) {
                 temph = h;
                 temps = s;
-                div.style.backgroundColor = `hsl(${h},${s}%,${l}%)`
-                console.log("first time");
-                console.log({ h, s, l });
-                console.log({ temph, temps });
-
-
+                div.style.backgroundColor = `hsl(${h},${s}%,${l}%)`;
             } else {
-                console.log("not AGAIN");
                 if (l <= 0) {
                     l = 0
                 } else {
                     l = l - 10;
                 };
-                console.log({ temph, temps, l });
                 div.style.backgroundColor = `hsl(${temph},${temps}%,${l}%)`
             }
-
         })
     })
 }
-
 
 function changeColor(max) {
     return Math.floor(
@@ -66,14 +52,20 @@ function changeColor(max) {
     )
 }
 
-function startSketching(){
+function clearContainer() {
+    while (divContainer.firstChild) {
+        divContainer.removeChild(divContainer.lastChild);
+    }
+}
+
+function startSketching() {
+    if (divContainer.hasChildNodes) {
+        clearContainer()
+    }
     createDivs();
     addHoverColor();
 }
 
 startSketching();
 
-buttonReset.addEventListener('click',()=>{
-    document.clear();
-    startSketching();
-})
+buttonReset.addEventListener('click', startSketching)
